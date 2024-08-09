@@ -5,7 +5,7 @@ from typing import Union
 from pyrogram.types import InlineKeyboardMarkup
 
 import config
-from PURVIMUSIC import Carbon, YouTube, app
+from PURVIMUSIC import Carbon, YouTube, app, YTB
 from PURVIMUSIC.core.call import PURVI
 from PURVIMUSIC.misc import db
 from PURVIMUSIC.utils.database import add_active_video_chat, is_active_chat
@@ -78,6 +78,12 @@ async def stream(
                         vidid, mystic, video=status, videoid=True
                     )
                 except:
+                    try:
+                        file_path, direct = await YTB.download(
+                            vidid, mystic, video=status, videoid=True
+                        )
+                    except:
+                        await mystic.edit_text(_["play_3"])
                     raise AssistantErr(_["play_14"])
                 await PURVI.join_call(
                     chat_id,
@@ -142,6 +148,12 @@ async def stream(
                 vidid, mystic, videoid=True, video=status
             )
         except:
+            try:
+                file_path, direct = await YTB.download(
+                    vidid, mystic, videoid=True, video=status
+                )
+            except:
+                await mystic.edit_text(_["play_3"])
             raise AssistantErr(_["play_14"])
         if await is_active_chat(chat_id):
             await put_queue(
