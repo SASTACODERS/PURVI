@@ -9,7 +9,7 @@ from pyrogram.errors import (
 )
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
-from PURVIMUSIC import YouTube, app
+from PURVIMUSIC import YouTube, app, YTB
 from PURVIMUSIC.misc import SUDOERS
 from PURVIMUSIC.utils.database import (
     get_assistant,
