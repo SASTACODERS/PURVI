@@ -2,7 +2,7 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardMarkup, Message
 
 import config
-from PURVIMUSIC import YouTube, app
+from PURVIMUSIC import YouTube, app, YTB
 from PURVIMUSIC.core.call import PURVI
 from PURVIMUSIC.misc import db
 from PURVIMUSIC.utils.database import get_loop
@@ -138,7 +138,15 @@ async def skip(cli, message: Message, _, chat_id):
                 video=status,
             )
         except:
-            return await mystic.edit_text(_["call_6"])
+            try:
+                file_path, direct = await YTB.download(
+                    videoid,
+                    mystic,
+                    videoid=True,
+                    video=status,
+                )
+            except:
+                return await mystic.edit_text(_["call_6"])
         try:
             image = await YouTube.thumbnail(videoid, True)
         except:
