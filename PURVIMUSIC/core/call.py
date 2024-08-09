@@ -423,6 +423,7 @@ class Call(PyTgCalls):
                             videoid=True,
                             video=str(streamtype) == "video",
                         )
+                    except:
                     return await mystic.edit_text(
                         _["call_6"], disable_web_page_preview=True
                     )
